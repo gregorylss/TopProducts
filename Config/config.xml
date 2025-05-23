@@ -19,13 +19,7 @@
         <command class="TopProducts\Command\MySuperCommand" />
         -->
     </commands>
-
-    <services>
-        <service id="top_products.smarty.plugin" class="TopProducts\Smarty\TopProducts">
-            <tag name="thelia.parser.register_plugin"/>
-        </service>
-    </services>
-
+  
     <hooks>
         <hook id="top_products.hook" class="TopProducts\Hook\TopProductsHook">
             <tag name="hook.event_listener" type="backoffice" event="category.tab" method="addCategoryTopProductsTab"/>

@@ -1,42 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<database defaultIdMethod="native" name="thelia">
+<database defaultIdMethod="native" name="TheliaMain"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="../../../../core/vendor/propel/propel/resources/xsd/database.xsd" >
 
-    <!--
-    See propel documentation on http://propelorm.org for all information about schema file
+  <table name="top_product" namespace="TopProducts\Model">
+    <column name="id" type="INTEGER" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="element_key" type="VARCHAR" size="255" />
+    <column name="element_id" type="INTEGER" />
+    <column name="product_id" type="INTEGER" />
+    <column name="selection_code" type="VARCHAR" size="255" />
+    <column name="position" type="INTEGER" />
 
-    <table name="product_rel" namespace="TopProducts\Model">
-        <column autoIncrement="true" name="id" primaryKey="true" required="true" type="INTEGER" />
-        <column defaultValue="0" name="visible" required="true" type="TINYINT" />
-        <column defaultValue="0" name="position" required="true" type="INTEGER" />
-        <column name="title" size="255" type="VARCHAR" />
-        <column name="description" type="CLOB" />
-        <column name="chapo" type="LONGVARCHAR" />
-        <column name="postscriptum" type="LONGVARCHAR" />
-        <foreign-key foreignTable="product" name="fk_product_id" onDelete="CASCADE" onUpdate="RESTRICT">
-            <reference foreign="id" local="product_id" />
-        </foreign-key>
-        <behavior name="timestampable" />
-        <behavior name="i18n">
-            <parameter name="i18n_columns" value="title, description, chapo, postscriptum" />
-        </behavior>
-        <behavior name="versionable">
-            <parameter name="log_created_at" value="true" />
-            <parameter name="log_created_by" value="true" />
-        </behavior>
-    </table>
-    -->
-
-    <table name="top_product" namespace="TopProducts\Model">
-        <column autoIncrement="true" name="id" primaryKey="true" required="true" type="INTEGER" />
-        <column name="element_key" required="true" size="255" type="VARCHAR" />
-        <column name="element_id" required="true" type="INTEGER" />
-        <column name="product_id" type="INTEGER" required="true"/>
-        <column name="selection_code" type="VARCHAR" size="55" required="true"/>
-        <column name="position" type="INTEGER" required="true"/>
-        <foreign-key foreignTable="product" name="fk_top_product_product_id" onDelete="CASCADE" onUpdate="RESTRICT">
-            <reference foreign="id" local="product_id" />
-        </foreign-key>
-    </table>
-
-    <external-schema filename="local/config/schema.xml" referenceOnly="true" />
+    <foreign-key foreignTable="product" phpName="Product">
+      <reference local="product_id" foreign="id" />
+    </foreign-key>
+  </table>
+  <external-schema filename="local/config/schema.xml" referenceOnly="true" />
 </database>

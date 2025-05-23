@@ -1,27 +1,23 @@
 <?php
 
-namespace TopProducts\Smarty;
+namespace TopProducts\Twig;
 
-use TheliaSmarty\Template\AbstractSmartyPlugin;
-use TheliaSmarty\Template\SmartyPluginDescriptor;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 use TopProducts\Model\TopProduct;
 use TopProducts\Model\TopProductQuery;
 
-class TopProducts extends AbstractSmartyPlugin
+class TopProductsExtension extends AbstractExtension
 {
-    public function getPluginDescriptors()
+    public function getFunctions(): array
     {
         return [
-            new SmartyPluginDescriptor('function', 'top_products', $this, 'getTopProducts'),
+            new TwigFunction('top_products', [$this, 'getTopProduct']),
         ];
     }
 
-    public function getTopProducts($data, $smarty)
+    public function getTopProducts(string $elementKey, int $elementId, string $selectionCode): string
     {
-        $elementKey = $data['elementKey'];
-        $elementId = $data['elementId'];
-        $selectionCode = $data['selectionCode'];
-
         $topProductResults = TopProductQuery::create()
             ->filterByElementKey($elementKey)
             ->filterByElementId($elementId)
@@ -35,6 +31,6 @@ class TopProducts extends AbstractSmartyPlugin
             $topProducts[] = $topProductResult->getProductId();
         }
 
-        $smarty->assign('topProducts', implode(',', $topProducts));
+        return implode(',', $topProducts);
     }
 }
