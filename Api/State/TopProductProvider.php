@@ -1,6 +1,6 @@
 <?php
 
-namespace TopProducts\Api\Provider;
+namespace TopProducts\Api\State;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
