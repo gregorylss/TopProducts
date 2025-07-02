@@ -15,7 +15,7 @@ use Thelia\Api\Resource\PropelResourceInterface;
 use Thelia\Api\Resource\PropelResourceTrait;
 use Thelia\Api\Resource\ResourceAddonInterface;
 use Thelia\Api\Resource\ResourceAddonTrait;
-use TopProducts\Api\Provider\TopProductProvider;
+use TopProducts\Api\State\TopProductProvider;
 use TopProducts\Model\Map\TopProductTableMap;
 
 #[ApiResource(
